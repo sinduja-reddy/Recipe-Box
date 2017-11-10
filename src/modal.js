@@ -14,7 +14,7 @@ const RecipeModal =(props)=>{
             <Form>
               <FormGroup>
                 <Label for="Recipe">Recipe</Label>
-                <Input type="text" name="title" id="Recipe" placeholder="Enter Recipe" value={props.currentTitle}onChange={props.change} />
+                <Input type="text" name="title" id="Recipe" placeholder="Enter Recipe" value={ props.currentTitle } onChange={props.change} />
               </FormGroup>
               <FormGroup>
                 <Label for="Ingredients">Ingredients</Label>

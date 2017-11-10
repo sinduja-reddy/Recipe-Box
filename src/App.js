@@ -28,7 +28,8 @@ class App extends Component {
 
   toggle() {
     this.setState({
-      modal: !this.state.modal
+      modal: !this.state.modal,
+      edit:false
     });
   }
 
@@ -50,6 +51,8 @@ class App extends Component {
     let newRecipes=this.state.recipes.concat([{title:this.state.title, recIng: this.state.ing.split(',')}])
     this.setState({recipes: newRecipes,
                     modal:!this.state.modal,
+                    title:'',
+                    ing:''
                   });
     localStorage.setItem('recipe',JSON.stringify(newRecipes))
   }
