@@ -19,7 +19,6 @@ class App extends Component {
     this.handleChange=this.handleChange.bind(this);
     this.addRecipe=this.addRecipe.bind(this);
     this.addEditedRecipe=this.addEditedRecipe.bind(this);
-    this.closeModal=this.closeModal.bind(this);
   }
   componentWillMount(){
     var recipeBox= (typeof localStorage["recipe"] !== "undefined")? JSON.parse(localStorage["recipe"]):[{ title: 'curry', recIng: ['aloo','jeera']}];
@@ -29,7 +28,9 @@ class App extends Component {
   toggle() {
     this.setState({
       modal: !this.state.modal,
-      edit:false
+      edit:false,
+      title:'',
+      ing:''
     });
   }
 
@@ -37,14 +38,6 @@ class App extends Component {
     const state = this.state
         state[e.target.name] = e.target.value;
         this.setState(state);
-  }
-  closeModal(){
-    this.setState({
-      modal: !this.state.modal,
-      edit: false,
-      title:'',
-      ing:''
-    });
   }
 
   addRecipe(){

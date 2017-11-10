@@ -24,7 +24,7 @@ const RecipeModal =(props)=>{
           </ModalBody>
           <ModalFooter>
             <Button color="primary" onClick={props.edit? props.editAdd : props.add}>{props.edit? 'Edit Recipe' : 'Add Recipe'}</Button>
-            <Button color="secondary" onClick={props.close}>Close</Button>
+            <Button color="secondary" onClick={props.toggle}>Close</Button>
           </ModalFooter>
         </Modal>
         </div>)
