@@ -103,7 +103,7 @@ class App extends Component {
               )})
         }
         </div>
-          <RecipeModal edit={this.state.edit} add={this.addRecipe} toggle={this.toggle} change={this.handleChange} modal={this.state.modal} currentTitle={this.state.title} editAdd={this.addEditedRecipe} ing={this.state.ing} close={this.closeModal}/>
+          <RecipeModal edit={this.state.edit} add={this.addRecipe} toggle={this.toggle} change={this.handleChange} modal={this.state.modal} currentTitle={this.state.title} editAdd={this.addEditedRecipe} ing={this.state.ing}/>
         </div>
         
     );
