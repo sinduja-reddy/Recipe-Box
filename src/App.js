@@ -1,6 +1,6 @@
-import React, { Component } from 'react';
+import React, { Component } from 'react'
 import RecipeModal from './modal'
-import './App.css';
+import './App.css'
 import RecipeList from './recipeList'
 
 
