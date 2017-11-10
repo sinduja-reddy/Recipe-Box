@@ -19,6 +19,7 @@ class App extends Component {
     this.handleChange=this.handleChange.bind(this);
     this.addRecipe=this.addRecipe.bind(this);
     this.addEditedRecipe=this.addEditedRecipe.bind(this);
+    this.closeModal=this.closeModal.bind(this);
   }
   componentWillMount(){
     var recipeBox= (typeof localStorage["recipe"] !== "undefined")? JSON.parse(localStorage["recipe"]):[{ title: 'curry', recIng: ['aloo','jeera']}];
@@ -27,8 +28,7 @@ class App extends Component {
 
   toggle() {
     this.setState({
-      modal: !this.state.modal,
-      edit: false
+      modal: !this.state.modal
     });
   }
 
@@ -37,11 +37,19 @@ class App extends Component {
         state[e.target.name] = e.target.value;
         this.setState(state);
   }
+  closeModal(){
+    this.setState({
+      modal: !this.state.modal,
+      edit: false,
+      title:'',
+      ing:''
+    });
+  }
 
   addRecipe(){
     let newRecipes=this.state.recipes.concat([{title:this.state.title, recIng: this.state.ing.split(',')}])
     this.setState({recipes: newRecipes,
-                    modal:!this.state.modal
+                    modal:!this.state.modal,
                   });
     localStorage.setItem('recipe',JSON.stringify(newRecipes))
   }
@@ -63,8 +71,8 @@ class App extends Component {
       edit: !this.state.edit,
       modal: !this.state.modal,
       title:'',
-      ing:''
-    });
+      ing:'',
+     });
     let newRecipes=this.state.recipes
     localStorage.setItem('recipe',JSON.stringify(newRecipes))
   }
@@ -99,7 +107,7 @@ class App extends Component {
               )})
         }
         </div>
-          <RecipeModal edit={this.state.edit} add={this.addRecipe} toggle={this.toggle} change={this.handleChange} modal={this.state.modal} currentTitle={this.state.title} editAdd={this.addEditedRecipe} ing={this.state.ing}/>
+          <RecipeModal edit={this.state.edit} add={this.addRecipe} toggle={this.toggle} change={this.handleChange} modal={this.state.modal} currentTitle={this.state.title} editAdd={this.addEditedRecipe} ing={this.state.ing} close={this.closeModal}/>
         </div>
         
     );
