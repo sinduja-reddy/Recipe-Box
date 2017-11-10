@@ -14,11 +14,11 @@ const RecipeModal =(props)=>{
             <Form>
               <FormGroup>
                 <Label for="Recipe">Recipe</Label>
-                <Input type="text" name="title" id="Recipe" placeholder="Enter Recipe" value={props.edit?props.currentTitle:''}onChange={props.change} />
+                <Input type="text" name="title" id="Recipe" placeholder="Enter Recipe" value={props.currentTitle}onChange={props.change} />
               </FormGroup>
               <FormGroup>
                 <Label for="Ingredients">Ingredients</Label>
-                <Input type="textarea" name="ing" id="Ingredients" placeholder="Enter Ingredients"  value={props.edit?props.ing:''} onChange={props.change}/>
+                <Input type="textarea" name="ing" id="Ingredients" placeholder="Enter Ingredients"  value={props.ing} onChange={props.change}/>
               </FormGroup>
             </Form>
           </ModalBody>

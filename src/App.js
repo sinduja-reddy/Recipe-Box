@@ -18,7 +18,7 @@ class App extends Component {
     this.toggle = this.toggle.bind(this);
     this.handleChange=this.handleChange.bind(this);
     this.addRecipe=this.addRecipe.bind(this);
-    this.editAdded=this.editAdded.bind(this);
+    this.addEditedRecipe=this.addEditedRecipe.bind(this);
   }
   componentWillMount(){
     var recipeBox= (typeof localStorage["recipe"] !== "undefined")? JSON.parse(localStorage["recipe"]):[{ title: 'curry', recIng: ['aloo','jeera']}];
@@ -39,21 +39,31 @@ class App extends Component {
   }
 
   addRecipe(){
-    this.state.recipes.push({title:this.state.title, recIng: this.state.ing.split(',')})
-    this.setState({recipes:this.state.recipes,
+    let newRecipes=this.state.recipes.concat([{title:this.state.title, recIng: this.state.ing.split(',')}])
+    this.setState({recipes: newRecipes,
                     modal:!this.state.modal
                   });
-    let newRecipes=this.state.recipes
     localStorage.setItem('recipe',JSON.stringify(newRecipes))
   }
   
-  editAdded(){
+  addEditedRecipe(){
     let i = this.state.index;
-    this.state.recipes.splice(i,1,{title:this.state.title, recIng: this.state.ing.split(',')});
+    let newArray= this.state.recipes.map((recipe,index)=>{
+        if(index===i){
+          recipe.title=this.state.title;
+          recipe.recIng= this.state.ing.split(',');
+          return recipe;
+        }else{
+          return recipe;
+        }
+      });
+    
     this.setState({
-      recipes:this.state.recipes,
+      recipes: newArray,
       edit: !this.state.edit,
-      modal: !this.state.modal
+      modal: !this.state.modal,
+      title:'',
+      ing:''
     });
     let newRecipes=this.state.recipes
     localStorage.setItem('recipe',JSON.stringify(newRecipes))
@@ -70,11 +80,9 @@ class App extends Component {
     })
   }
   delete(i){
-    let deleted= this.state.recipes.splice(i,1);
-    this.setState({
-      recipes: this.state.recipes
-    })
-     localStorage.setItem('recipe',JSON.stringify(this.state.recipes))
+    let arr= this.state.recipes.filter((recipe,index)=>index!==i);
+    this.setState({recipes: arr});
+    localStorage.setItem('recipe',JSON.stringify(arr))
 
   }
   
@@ -91,7 +99,7 @@ class App extends Component {
               )})
         }
         </div>
-          <RecipeModal edit={this.state.edit} add={this.addRecipe} toggle={this.toggle} change={this.handleChange} modal={this.state.modal} currentTitle={this.state.title} editAdd={this.editAdded} ing={this.state.ing}/>
+          <RecipeModal edit={this.state.edit} add={this.addRecipe} toggle={this.toggle} change={this.handleChange} modal={this.state.modal} currentTitle={this.state.title} editAdd={this.addEditedRecipe} ing={this.state.ing}/>
         </div>
         
     );
